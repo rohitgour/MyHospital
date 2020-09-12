@@ -6,11 +6,14 @@ import MyHospital.pojo.User;
 import com.sun.glass.events.KeyEvent;
 import java.sql.SQLException;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 
 public class ForgotPassword extends javax.swing.JFrame {
  
     private String userid; 
+    char[] pw,rpw;
     
     
     public ForgotPassword() {
@@ -28,10 +31,21 @@ public class ForgotPassword extends javax.swing.JFrame {
     }
      private boolean validateInputs()
     {
-      char[] pw =pwd.getPassword();
-      char[] rpw = rpwd.getPassword();
-      return !(pw.length<4||rpw.length<4);
+      pw =pwd.getPassword();
+      rpw = rpwd.getPassword();
+      return !(pw.length==0||rpw.length==0);
      }
+     public boolean passMatch()
+     {
+        String pass = String.valueOf(pw);
+      Pattern my_pattern = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+      Matcher my = my_pattern.matcher(pass);
+      boolean check = my.find();
+      if(!check)
+          return false;
+      return true;
+     }
+      
     public boolean passwordMatch(String a,String b) {
         return a.equals(b);
     }
@@ -200,10 +214,6 @@ public class ForgotPassword extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
@@ -231,6 +241,10 @@ public class ForgotPassword extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -321,14 +335,19 @@ public class ForgotPassword extends javax.swing.JFrame {
     private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
         // TODO add your handling code here:
            if(validateInputs()==false)
-        {
+             {
             JOptionPane.showMessageDialog(null,"Please Fill Both Fields","Error",JOptionPane.ERROR_MESSAGE);
             return;
-        }
+             }
+//           if(passMatch()==false)
+//           {
+//               JOptionPane.showMessageDialog(null,"Please Use atleast one special character");
+//               return;
+//           }
+         
+           
         try {
-        char[] pw = pwd.getPassword();
         String pwsd = String.valueOf(pw);
-        char[] rpw = rpwd.getPassword();
         String repwsd = String.valueOf(rpw);
         if(!passwordMatch(pwsd,repwsd))
         {

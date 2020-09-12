@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package MyHospital.gui;
 
 import MyHospital.Dao.EmpDao;
@@ -14,16 +10,16 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class UpdateEmpFrame extends javax.swing.JFrame {
-    private String empid,empname,sal,job;
+    private String eid,tag,ename,contact,gender,alcontact,add,ejob,esal,email,Accountno,IFSC,Branch;
     public UpdateEmpFrame() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
     private boolean validateInputs()
     {
-        empname = txtEmpname.getText();
-        sal = txtSal.getText();
-        if(empname.isEmpty()||sal.isEmpty())
+        ename = txtEmpname.getText();
+        esal = txtSal.getText();
+        if(ename.isEmpty()||esal.isEmpty())
             return true;
         return false;
     }
@@ -32,7 +28,7 @@ public class UpdateEmpFrame extends javax.swing.JFrame {
         try
         {
             
-             jcEmpid.removeAllItems();
+         //    jcEmpid.removeAllItems();
             ArrayList<EmpPojo> id=EmpDao.getAllId();
             id =EmpDao.getAllId();
             for(EmpPojo e:id)
@@ -66,6 +62,8 @@ public class UpdateEmpFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -124,6 +122,11 @@ public class UpdateEmpFrame extends javax.swing.JFrame {
 
         txtEmpid.setFont(new java.awt.Font("Sitka Text", 1, 19)); // NOI18N
         txtEmpid.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtEmpid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEmpidActionPerformed(evt);
+            }
+        });
         txtEmpid.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtEmpidKeyPressed(evt);
@@ -197,6 +200,7 @@ public class UpdateEmpFrame extends javax.swing.JFrame {
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jRadioButton4.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(jRadioButton4);
         jRadioButton4.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         jRadioButton4.setText("Mrs");
         jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -206,6 +210,7 @@ public class UpdateEmpFrame extends javax.swing.JFrame {
         });
 
         jRadioButton3.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(jRadioButton3);
         jRadioButton3.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         jRadioButton3.setText("Mr");
 
@@ -234,6 +239,7 @@ public class UpdateEmpFrame extends javax.swing.JFrame {
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
         jRadioButton5.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup2.add(jRadioButton5);
         jRadioButton5.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         jRadioButton5.setText("Female");
         jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -243,6 +249,7 @@ public class UpdateEmpFrame extends javax.swing.JFrame {
         });
 
         jRadioButton6.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup2.add(jRadioButton6);
         jRadioButton6.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
         jRadioButton6.setText("Male");
         jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
@@ -522,6 +529,10 @@ public class UpdateEmpFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtEmpidKeyPressed
 
+    private void txtEmpidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmpidActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -561,6 +572,8 @@ public class UpdateEmpFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

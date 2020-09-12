@@ -3,6 +3,7 @@ package MyHospital.Dao;
 
 import MyHospital.dbutil.DBConnection;
 import MyHospital.pojo.EmpPojo;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,14 +32,24 @@ public class EmpDao {
         System.out.println(sr);
         return sr;
     }
-    public static boolean AddEmp(EmpPojo p)throws SQLException
+    public static boolean AddEmp(EmpPojo p)throws SQLException ,IOException
     {
-        PreparedStatement ps = DBConnection.getConnection().prepareStatement("insert into Employees values(?,?,?,?,'Y')");
+        PreparedStatement ps = DBConnection.getConnection().prepareStatement("insert into Employees values(?,?,?,?,'Y',?,?,?,?,?,?,?,?,?,?)");
         
         ps.setString(1,p.getEmpid());
         ps.setString(2,p.getEmpname());
         ps.setString(3,p.getJob()); //.toUpperCase()
         ps.setInt(4,(int)p.getSal());
+        ps.setString(5,p.getTag());
+        ps.setString(6, p.getGender());
+        ps.setInt(7, p.getContact());
+        ps.setInt(8, p.getAlter_contact());
+        ps.setString(9, p.getAddress());
+        ps.setString(10,p.getEmail());
+        ps.setInt(11,p.getAccount_no());
+        ps.setString(12,p.getIfsc_code());
+        ps.setString(13,p.getBranch());
+        ps.setBinaryStream(14,p.getPs(),p.getPs().available());
         int a = ps.executeUpdate();
         if(a==1)
             return true;
@@ -55,7 +66,7 @@ public class EmpDao {
             p.setEmpid(rs.getString(1));
             p.setEmpname(rs.getString(2));
             p.setJob(rs.getString(3));
-            p.setSal(rs.getDouble(4));
+            p.setSal(rs.getInt(4));
             emplist.add(p);
         }
         return emplist;
@@ -88,7 +99,7 @@ public class EmpDao {
             p.setEmpid(rs.getString(1));
             p.setEmpname(rs.getString(2));
             p.setJob(rs.getString(3));
-            p.setSal(rs.getDouble(4));
+            p.setSal(rs.getInt(4));
              p.setActive(rs.getString(5));
              EmpDetails.add(p);
              
@@ -110,8 +121,18 @@ public static EmpPojo findEmpById(String eno)throws SQLException
          e.setEmpid(rs.getString(1));
          e.setEmpname(rs.getString(2));
          e.setJob(rs.getString(3));
-         e.setSal(rs.getDouble(4));
+         e.setSal(rs.getInt(4));
          e.setActive(rs.getString(5));
+         e.setTag(rs.getString(6));
+         e.setGender(rs.getString(7));
+         e.setContact(rs.getInt(8));
+         e.setAlter_contact(rs.getInt(9));
+         e.setAddress(rs.getString(10));
+         e.setEmail(rs.getString(11));
+         e.setAccount_no(rs.getInt(12));
+         e.setIfsc_code(rs.getString(13));
+         e.setBranch(rs.getString(14));
+  //       e.setPs(null);
        }
        return e; 
     }

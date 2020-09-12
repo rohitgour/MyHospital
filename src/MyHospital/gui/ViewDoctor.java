@@ -33,7 +33,7 @@ public class ViewDoctor extends javax.swing.JFrame {
     {
         try
         {
-            ArrayList<DoctorPojo> doctorlist=DoctorDao.getAllDoctor();
+            ArrayList<DoctorPojo> doctorlist=DoctorDao.getAllDoctors();
             Object[] rows = new Object[4];
             DefaultTableModel dtm = (DefaultTableModel)jtEmpData.getModel();
             for(DoctorPojo e:doctorlist)

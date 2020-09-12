@@ -292,7 +292,7 @@ String empid,empname,job,sal;
             job =jcJob.getSelectedItem().toString();
             p.setJob(job);
             sal = txtSal.getText();
-            double d= Double.parseDouble(sal);
+            int d= Integer.parseInt(sal);
             p.setSal(d);
             System.out.println("before result");
             boolean result = EmpDao.UpdateEmp(p);

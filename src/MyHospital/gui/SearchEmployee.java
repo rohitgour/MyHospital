@@ -34,7 +34,7 @@ public class SearchEmployee extends javax.swing.JFrame {
               details=EmpDao.findEmpById(a);
               
                  System.out.println("Hey Rohit"+details);
-                 txtPatientDetail.setText("Employee Id - "+details.getEmpid()+"\nEmployee Name - "+details.getEmpname()+"\nJob - "+details.getJob()+"\nSalary - "+details.getSal()+"\nActive - "+details.getActive());
+                 txtPatientDetail.setText("Employee Id - "+details.getEmpid()+"\nEmployee Name - "+details.getTag()+" "+details.getEmpname()+"\nJob - "+details.getJob()+"\nSalary - "+details.getSal()+"\nActive - "+"\nGender - "+details.getGender()+"\nContact - "+details.getContact()+"\nAlter Contact - "+details.getAlter_contact()+"\nAddress - "+details.getAddress()+details.getActive());
                 
              }
          catch(SQLException e)
@@ -66,6 +66,7 @@ public class SearchEmployee extends javax.swing.JFrame {
         btnHome = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtEmpName1 = new javax.swing.JTextField();
+        txtImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -102,7 +103,6 @@ public class SearchEmployee extends javax.swing.JFrame {
         txtPatientDetail.setColumns(20);
         txtPatientDetail.setFont(new java.awt.Font("Sitka Small", 1, 22)); // NOI18N
         txtPatientDetail.setRows(5);
-        txtPatientDetail.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 102, 102), new java.awt.Color(51, 255, 204)));
         jScrollPane1.setViewportView(txtPatientDetail);
 
         jLabel3.setFont(new java.awt.Font("Sitka Text", 1, 20)); // NOI18N
@@ -183,12 +183,12 @@ public class SearchEmployee extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 530, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtImage, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +216,9 @@ public class SearchEmployee extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 407, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtImage, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -234,17 +236,45 @@ public class SearchEmployee extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jcIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcIdActionPerformed
+    private void txtEmpName1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpName1KeyPressed
         // TODO add your handling code here:
-        eid = jcId.getSelectedItem().toString();
-        System.out.println("your id "+eid);
-        getDetails(eid);
-    }//GEN-LAST:event_jcIdActionPerformed
+    }//GEN-LAST:event_txtEmpName1KeyPressed
 
-    private void txtEmployeeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeIdActionPerformed
+    private void txtEmpName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpName1ActionPerformed
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txtEmployeeIdActionPerformed
+    }//GEN-LAST:event_txtEmpName1ActionPerformed
+
+    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+        // TODO add your handling code here:
+        manageEmployeeframe r = new manageEmployeeframe();
+        r.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnHomeActionPerformed
+
+    private void txtEmpNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpNameKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER)
+        {
+            ename=txtEmpName.getText();
+
+            try
+            {
+
+                String id=EmpDao.getEmpIdByName(ename);
+                jcId.removeAllItems();
+                jcId.addItem(id);
+                //    JOptionPane.showMessageDialog(null,"invalid Userid! Please Fill valid Userid","Error",JOptionPane.ERROR_MESSAGE);
+            }
+            catch(SQLException e)
+            {
+                e.printStackTrace();
+                JOptionPane.showMessageDialog(null,"Some Problem occured Please visit after Some time","Error",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_txtEmpNameKeyPressed
+
+    private void txtEmpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmpNameActionPerformed
 
     private void txtEmployeeIdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmployeeIdKeyPressed
 
@@ -257,46 +287,17 @@ public class SearchEmployee extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtEmployeeIdKeyPressed
 
-    private void txtEmpNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpNameActionPerformed
+    private void txtEmployeeIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmployeeIdActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmpNameActionPerformed
 
-    private void txtEmpNameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpNameKeyPressed
-      if(evt.getKeyCode()==KeyEvent.VK_ENTER)
-        {
-            ename=txtEmpName.getText();
-            
-            try
-            {
-                
-                String id=EmpDao.getEmpIdByName(ename);
-                jcId.removeAllItems();
-                    jcId.addItem(id);
-                //    JOptionPane.showMessageDialog(null,"invalid Userid! Please Fill valid Userid","Error",JOptionPane.ERROR_MESSAGE);
-            }
-            catch(SQLException e)
-            {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(null,"Some Problem occured Please visit after Some time","Error",JOptionPane.ERROR_MESSAGE);
-            }
-        }
+    }//GEN-LAST:event_txtEmployeeIdActionPerformed
 
-    }//GEN-LAST:event_txtEmpNameKeyPressed
-
-    private void btnHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHomeActionPerformed
+    private void jcIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcIdActionPerformed
         // TODO add your handling code here:
-        manageEmployeeframe r = new manageEmployeeframe();
-        r.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnHomeActionPerformed
-
-    private void txtEmpName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmpName1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmpName1ActionPerformed
-
-    private void txtEmpName1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpName1KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmpName1KeyPressed
+        eid = jcId.getSelectedItem().toString();
+        System.out.println("your id "+eid);
+        getDetails(eid);
+    }//GEN-LAST:event_jcIdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,6 +347,7 @@ public class SearchEmployee extends javax.swing.JFrame {
     private javax.swing.JTextField txtEmpName;
     private javax.swing.JTextField txtEmpName1;
     private javax.swing.JTextField txtEmployeeId;
+    private javax.swing.JLabel txtImage;
     private javax.swing.JTextArea txtPatientDetail;
     // End of variables declaration//GEN-END:variables
 }

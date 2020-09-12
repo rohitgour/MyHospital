@@ -42,7 +42,7 @@ public class ReceptionistDao {
             p.setEmpid(rs.getString(1));
             p.setEmpname(rs.getString(2));
             p.setJob(rs.getString(3));
-            p.setSal(rs.getDouble(4));
+            p.setSal(rs.getInt(4));
             emplist.add(p);
         }
     return emplist;

@@ -9,6 +9,11 @@ import MyHospital.Dao.DoctorDao;
 import MyHospital.Dao.PatientDao;
 import MyHospital.pojo.PatientPojo;
 import MyHospital.pojo.userprofile;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -99,9 +104,9 @@ public final class AddPatientFrame extends javax.swing.JFrame {
     
       private  void accessDenied()
      {
-         boolean z=true;
+        // boolean z=true;
          String name=userprofile.getUsername();
-         if(z!=true)//if(name==null)
+         if(name==null)//if(z!=true)
          {
              JOptionPane.showMessageDialog(null,"Access Denied Please Login First!","Error",JOptionPane.ERROR_MESSAGE);
              Login frame = new Login();
@@ -162,102 +167,102 @@ public final class AddPatientFrame extends javax.swing.JFrame {
          // date = new java.sql.Date(d.getTime());
     }
       
-//      public String sendSms()
-//         {
-//             try
-//             {
-//
-//                 
-//                 String apiKey = "apikey="+"gfx6ajtU9ag-HJG6yvpa4NafeSl8c2EU4UHhFaWtRb";
-//                 String message = "&message="+" Your OTP is "+ refs+" And Patient Id:"+p_id+" from SANJEEVANI APP";
-//
-//                 String sender = "& sender=" + "TXTLCL";
-//                 String numbers = "&numbers=" + mo;
-//
-//                 URL url=new URL("https://api.textlocal.in/send/?");
-//                 HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-//                String data = apiKey + numbers + message + sender;
-//                conn.setDoOutput(true);
-//                conn.setRequestMethod("POST");
-//                conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
-//                OutputStream out= conn.getOutputStream();
-//                out.write(data.getBytes("UTF-8"));
-//
-//                InputStreamReader isr = new InputStreamReader(conn.getInputStream());
-//                BufferedReader rd = new BufferedReader (isr);
-//                StringBuffer stringBuffer = new StringBuffer();
-//                
-//                String line;
-//                while((line = rd.readLine())!=null)
-//                {
-//                    stringBuffer.append(line);
-//                }
-//                rd.close();
-//                 System.out.println("in send sms"+stringBuffer);;
-//                 return stringBuffer.toString();
-//                 
-//                
-//             }
-//             catch(Exception e)
-//             {
-//                 System.out.println("Error SMS"+e);
-//                 return "Error"+0;
-//             }
-//         }
-//      public void addPatientDetails()
-//      {
-//          int ans;
-//          int count=3;
-//          refs = 1000+(int)(Math.random()*28);
-//          String message = sendSms();
-//          if(message.contains("Invalid number"))
-//          {
-//              JOptionPane.showMessageDialog(null,"Please enter valid mobile number","Wrong",JOptionPane.ERROR_MESSAGE);
-//              return;
-//          }
-//          do
-//          {
-//              ans = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter one time Password","OTP",JOptionPane.INFORMATION_MESSAGE));
-//              if(refs==ans)
-//              {
-//                   PatientPojo p = new PatientPojo(p_id,f_name,s_name,age,BedNo,WardNo,opd,gender,m_status,date,address,mo,doctor_id,active,tag,relation);
-//                  try
-//                  {
-//                      boolean result = PatientDao.addPatient(p);
-//                      if(result)
-//                      {
-//                          JOptionPane.showMessageDialog(null,"Success!","Appointment book successfully",JOptionPane.INFORMATION_MESSAGE);
-//                          clear();
-//                          RecieptionistOptions r = new RecieptionistOptions();
-//                         r.setVisible(true);
-//                          this.dispose();
-//                          break;
-//                      }
-//                      else
-//                      {
-//                          JOptionPane.showMessageDialog(null,"Failed","Something went Wrong while inserting data",JOptionPane.ERROR_MESSAGE);
-//                      }
-//                  }
-//                  catch(SQLException e)
-//                  {
-//                      JOptionPane.showMessageDialog(null,"Something went Wrong Exception in DB","Error",JOptionPane.ERROR_MESSAGE);
-//                      
-//                  }
-//            
-//            
-//            
-//                  
-//              }
-//              else
-//              {
-//                  JOptionPane.showMessageDialog(null,"Please Enter Valid OTP","Error",JOptionPane.ERROR_MESSAGE);
-//                  count--;
-//              }
-//              
-//          }
-//          while(count!=0);
-//      }
-//      
+      public String sendSms()
+         {
+             try
+             {
+
+                 
+                 String apiKey = "apikey="+"gfx6ajtU9ag-HJG6yvpa4NafeSl8c2EU4UHhFaWtRb";
+                 String message = "&message="+" Your OTP is "+ refs+" And Patient Id:"+p_id+" from SANJEEVANI APP";
+
+                 String sender = "& sender=" + "TXTLCL";
+                 String numbers = "&numbers=" + mo;
+
+                 URL url=new URL("https://api.textlocal.in/send/?");
+                 HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+                String data = apiKey + numbers + message + sender;
+                conn.setDoOutput(true);
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Content-Length", Integer.toString(data.length()));
+                OutputStream out= conn.getOutputStream();
+                out.write(data.getBytes("UTF-8"));
+
+                InputStreamReader isr = new InputStreamReader(conn.getInputStream());
+                BufferedReader rd = new BufferedReader (isr);
+                StringBuffer stringBuffer = new StringBuffer();
+                
+                String line;
+                while((line = rd.readLine())!=null)
+                {
+                    stringBuffer.append(line);
+                }
+                rd.close();
+                 System.out.println("in send sms"+stringBuffer);;
+                 return stringBuffer.toString();
+                 
+                
+             }
+             catch(Exception e)
+             {
+                 System.out.println("Error SMS"+e);
+                 return "Error"+0;
+             }
+         }
+      public void addPatientDetails()
+      {
+          int ans;
+          int count=3;
+          refs = 1000+(int)(Math.random()*28);
+          String message = sendSms();
+          if(message.contains("Invalid number"))
+          {
+              JOptionPane.showMessageDialog(null,"Please enter valid mobile number","Wrong",JOptionPane.ERROR_MESSAGE);
+              return;
+          }
+          do
+          {
+              ans = Integer.parseInt(JOptionPane.showInputDialog(null,"Enter one time Password","OTP",JOptionPane.INFORMATION_MESSAGE));
+              if(refs==ans)
+              {
+                   PatientPojo p = new PatientPojo(p_id,f_name,s_name,age,BedNo,WardNo,opd,gender,m_status,date,address,mo,doctor_id,active,tag,relation,SYW);
+                  try
+                  {
+                      boolean result = PatientDao.addPatient(p);
+                      if(result)
+                      {
+                          JOptionPane.showMessageDialog(null,"Success!","Appointment book successfully",JOptionPane.INFORMATION_MESSAGE);
+                          clear();
+                          RecieptionistOptions r = new RecieptionistOptions();
+                         r.setVisible(true);
+                          this.dispose();
+                          break;
+                      }
+                      else
+                      {
+                          JOptionPane.showMessageDialog(null,"Failed","Something went Wrong while inserting data",JOptionPane.ERROR_MESSAGE);
+                      }
+                  }
+                  catch(SQLException e)
+                  {
+                      JOptionPane.showMessageDialog(null,"Something went Wrong Exception in DB","Error",JOptionPane.ERROR_MESSAGE);
+                      
+                  }
+            
+            
+            
+                  
+              }
+              else
+              {
+                  JOptionPane.showMessageDialog(null,"Please Enter Valid OTP","Error",JOptionPane.ERROR_MESSAGE);
+                  count--;
+              }
+              
+          }
+          while(count!=0);
+      }
+      
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -647,31 +652,31 @@ public final class AddPatientFrame extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null,"Error","Please input Valid Age",JOptionPane.ERROR_MESSAGE);
                 return;
             }
-     //       addPatientDetails();
-           PatientPojo p = new PatientPojo(p_id,f_name,s_name,age,BedNo,WardNo,opd,gender,m_status,date,address,mo,doctor_id,active,tag,relation,SYW);
-                  try
-                  {
-                      boolean result = PatientDao.addPatient(p);
-                      if(result)
-                      {
-                          JOptionPane.showMessageDialog(null,"Success!","Appointment book successfully",JOptionPane.INFORMATION_MESSAGE);
-                          clear();
-                          RecieptionistOptions r = new RecieptionistOptions();
-                         r.setVisible(true);
-                          this.dispose();
-                       //   break;
-                      }
-                      else
-                      {
-                          JOptionPane.showMessageDialog(null,"Failed","Something went Wrong while inserting data",JOptionPane.ERROR_MESSAGE);
-                      }
-                  }
-                  catch(SQLException e)
-                  {
-                      JOptionPane.showMessageDialog(null,"Something went Wrong Exception in DB","Error",JOptionPane.ERROR_MESSAGE);
-                      
-                  }
-            
+           addPatientDetails();
+//           PatientPojo p = new PatientPojo(p_id,f_name,s_name,age,BedNo,WardNo,opd,gender,m_status,date,address,mo,doctor_id,active,tag,relation,SYW);
+//                  try
+//                  {
+//                      boolean result = PatientDao.addPatient(p);
+//                      if(result)
+//                      {
+//                          JOptionPane.showMessageDialog(null,"Success!","Appointment book successfully",JOptionPane.INFORMATION_MESSAGE);
+//                          clear();
+//                          RecieptionistOptions r = new RecieptionistOptions();
+//                         r.setVisible(true);
+//                          this.dispose();
+//                        //   break;
+//                      }
+//                      else
+//                      {
+//                          JOptionPane.showMessageDialog(null,"Failed","Something went Wrong while inserting data",JOptionPane.ERROR_MESSAGE);
+//                      }
+//                  }
+//                  catch(SQLException e)
+//                  {
+//                      JOptionPane.showMessageDialog(null,"Something went Wrong Exception in DB","Error",JOptionPane.ERROR_MESSAGE);
+//                      
+//                  }
+//            
             
      
                  

@@ -17,7 +17,7 @@ public class Additional_Info extends javax.swing.JFrame {
     public Additional_Info() {
         initComponents();
     }
-    S
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -128,7 +128,7 @@ public class Additional_Info extends javax.swing.JFrame {
     private void jcAdditionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcAdditionalActionPerformed
         String query = jcAdditional.getSelectedItem().toString();
         System.out.println("your id "+query);
-        getDetails(query);
+     //   getDetails(query);
     }//GEN-LAST:event_jcAdditionalActionPerformed
 
     /**

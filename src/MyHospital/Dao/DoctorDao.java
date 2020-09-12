@@ -91,24 +91,6 @@ public class DoctorDao {
         return doctor;
     }
     
-    public static ArrayList<DoctorPojo> getAllDoctor()throws SQLException
-    {
-        Statement st = DBConnection.getConnection().createStatement();
-        ResultSet rs = st.executeQuery("select * from doctors where active='Y'");
-        ArrayList<DoctorPojo>doctorlist = new ArrayList<>();
-        while(rs.next())
-        {
-            DoctorPojo p = new DoctorPojo();
-            p.setUserid(rs.getString(1));
-            p.setDoctorid(rs.getString(2));
-            p.setQualification(rs.getString(3));
-            p.setSpecialist(rs.getString(4));
-            
-            doctorlist.add(p);
-        }
-        return doctorlist;
-    }
-    
      public static ArrayList<DoctorPojo> getAllDoctors()throws SQLException
     {
         Statement st = DBConnection.getConnection().createStatement();

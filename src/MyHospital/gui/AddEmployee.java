@@ -9,9 +9,9 @@ import MyHospital.Dao.EmpDao;
 import MyHospital.pojo.EmpPojo;
 import MyHospital.pojo.userprofile;
 import java.awt.Image;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -22,9 +22,10 @@ import javax.swing.JOptionPane;
  * @author HP
  */
 public class AddEmployee extends javax.swing.JFrame {
-    private String eid,ename,ejob,esal;
+    private String eid,tag,ename,contact,gender,alcontact,add,ejob,esal,email,Accountno,IFSC,Branch;
     private String filename = null;
     byte[] person_image= null;
+    FileInputStream fis;
     /**
      * Creates new form AddEmployee
      */
@@ -37,12 +38,20 @@ public class AddEmployee extends javax.swing.JFrame {
     }
     private boolean validateInputs()
     {
-        
+       
+        tag=getTag();
+        contact = txtCon.getText();
+        alcontact = txtACon.getText();
+        add = txtAdd.getText();
+        gender = getGen();
+        email = txtEmail.getText();
+        Accountno = txtACN.getText();
+        IFSC = txtIFSC.getText();
+        Branch = txtBranch.getText();
         ename = txtEmpname.getText();
         esal = txtSal.getText();
-        if(ename.isEmpty()||esal.isEmpty())
-            return true;
-        return false;
+      //      return tag.isEmpty()||ename.isEmpty()||contact.isEmpty()||alcontact.isEmpty()||add.isEmpty()||ejob.isEmpty()||esal.isEmpty()||email.isEmpty()||Accountno.isEmpty()||IFSC.isEmpty()||Branch.isEmpty()||gender.isEmpty();
+    return false; 
     }
     private void clearText()
     {
@@ -63,6 +72,24 @@ public class AddEmployee extends javax.swing.JFrame {
             System.out.println("Some Exception Occur");
         }
     }
+    private String getTag()
+      {
+            if(jrMr.isSelected())
+              return "Mr";
+            else if(jrMrs.isSelected())
+              return "Mrs";
+            else
+                return null;
+      }
+    private String getGen()
+      {
+            if(jrM.isSelected())
+              return "Male";
+            else if(jrFm.isSelected())
+              return "Female";
+            else
+                return null;
+      }
      private  void accessDenied()
      {
          String name=userprofile.getUsername();
@@ -86,6 +113,7 @@ public class AddEmployee extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -99,29 +127,29 @@ public class AddEmployee extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txtAdd = new javax.swing.JTextArea();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtEmpname1 = new javax.swing.JTextField();
-        txtEmpname2 = new javax.swing.JTextField();
+        txtCon = new javax.swing.JTextField();
+        txtACN = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtEmpname3 = new javax.swing.JTextField();
+        txtACon = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        txtEmpname4 = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         lblimage = new javax.swing.JLabel();
         btnIamgeChoose = new javax.swing.JButton();
         btnimageClick = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        jrMrs = new javax.swing.JRadioButton();
+        jrMr = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        jrFm = new javax.swing.JRadioButton();
+        jrM = new javax.swing.JRadioButton();
         jLabel9 = new javax.swing.JLabel();
-        txtEmpname5 = new javax.swing.JTextField();
+        txtIFSC = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
-        txtEmpname6 = new javax.swing.JTextField();
+        txtBranch = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -174,9 +202,9 @@ public class AddEmployee extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
         jLabel6.setText("Add new Employee");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txtAdd.setColumns(20);
+        txtAdd.setRows(5);
+        jScrollPane1.setViewportView(txtAdd);
 
         jLabel7.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
         jLabel7.setText("Contact number");
@@ -184,19 +212,19 @@ public class AddEmployee extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
         jLabel8.setText("Account Number");
 
-        txtEmpname1.setFont(new java.awt.Font("Sitka Text", 1, 19)); // NOI18N
+        txtCon.setFont(new java.awt.Font("Sitka Text", 1, 19)); // NOI18N
 
-        txtEmpname2.setFont(new java.awt.Font("Sitka Text", 1, 19)); // NOI18N
+        txtACN.setFont(new java.awt.Font("Sitka Text", 1, 19)); // NOI18N
 
         jLabel10.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
         jLabel10.setText("Address");
 
-        txtEmpname3.setFont(new java.awt.Font("Sitka Text", 1, 19)); // NOI18N
+        txtACon.setFont(new java.awt.Font("Sitka Text", 1, 19)); // NOI18N
 
         jLabel11.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
         jLabel11.setText("Email Id");
 
-        txtEmpname4.setFont(new java.awt.Font("Sitka Text", 1, 19)); // NOI18N
+        txtEmail.setFont(new java.awt.Font("Sitka Text", 1, 19)); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
         jLabel12.setText("Alternamte number");
@@ -223,19 +251,20 @@ public class AddEmployee extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(153, 204, 255));
         jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        jRadioButton4.setBackground(new java.awt.Color(153, 204, 255));
-        jRadioButton4.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
-        jRadioButton4.setText("Mrs");
-        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+        jrMrs.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(jrMrs);
+        jrMrs.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
+        jrMrs.setText("Mrs");
+        jrMrs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton4ActionPerformed(evt);
+                jrMrsActionPerformed(evt);
             }
         });
 
-        jRadioButton3.setBackground(new java.awt.Color(153, 204, 255));
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
-        jRadioButton3.setText("Mr");
+        jrMr.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup1.add(jrMr);
+        jrMr.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
+        jrMr.setText("Mr");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -243,9 +272,9 @@ public class AddEmployee extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(jRadioButton3)
+                .addComponent(jrMr)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
-                .addComponent(jRadioButton4)
+                .addComponent(jrMrs)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -253,29 +282,31 @@ public class AddEmployee extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton3))
+                    .addComponent(jrMrs)
+                    .addComponent(jrMr))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(153, 204, 255));
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
 
-        jRadioButton5.setBackground(new java.awt.Color(153, 204, 255));
-        jRadioButton5.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
-        jRadioButton5.setText("Female");
-        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+        jrFm.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup2.add(jrFm);
+        jrFm.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
+        jrFm.setText("Female");
+        jrFm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton5ActionPerformed(evt);
+                jrFmActionPerformed(evt);
             }
         });
 
-        jRadioButton6.setBackground(new java.awt.Color(153, 204, 255));
-        jRadioButton6.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
-        jRadioButton6.setText("Male");
-        jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
+        jrM.setBackground(new java.awt.Color(153, 204, 255));
+        buttonGroup2.add(jrM);
+        jrM.setFont(new java.awt.Font("Sitka Text", 1, 14)); // NOI18N
+        jrM.setText("Male");
+        jrM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton6ActionPerformed(evt);
+                jrMActionPerformed(evt);
             }
         });
 
@@ -285,9 +316,9 @@ public class AddEmployee extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jRadioButton6)
+                .addComponent(jrM)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
-                .addComponent(jRadioButton5)
+                .addComponent(jrFm)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -295,20 +326,20 @@ public class AddEmployee extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton5)
-                    .addComponent(jRadioButton6))
+                    .addComponent(jrFm)
+                    .addComponent(jrM))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel9.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
         jLabel9.setText("IFSC code");
 
-        txtEmpname5.setFont(new java.awt.Font("Sitka Text", 1, 19)); // NOI18N
+        txtIFSC.setFont(new java.awt.Font("Sitka Text", 1, 19)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Sitka Text", 1, 24)); // NOI18N
         jLabel13.setText("Branch");
 
-        txtEmpname6.setFont(new java.awt.Font("Sitka Text", 1, 19)); // NOI18N
+        txtBranch.setFont(new java.awt.Font("Sitka Text", 1, 19)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -329,8 +360,8 @@ public class AddEmployee extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(txtEmpname, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtEmpname1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
-                                        .addComponent(txtEmpname3, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                        .addComponent(txtCon, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                                        .addComponent(txtACon, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
                                         .addComponent(jScrollPane1))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,7 +398,7 @@ public class AddEmployee extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGap(0, 220, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtEmpname4, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                     .addComponent(btnimageClick)
@@ -394,9 +425,9 @@ public class AddEmployee extends javax.swing.JFrame {
                                         .addComponent(jLabel13)
                                         .addGap(57, 57, 57)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtEmpname5, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEmpname2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtEmpname6, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtIFSC, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtACN, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(105, 105, 105)
@@ -411,11 +442,11 @@ public class AddEmployee extends javax.swing.JFrame {
                         .addGap(110, 110, 110)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(txtEmpname4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(txtEmpname2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtACN, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addComponent(jLabel6)
@@ -437,18 +468,18 @@ public class AddEmployee extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(txtEmpname1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtCon, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(txtEmpname5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtIFSC, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEmpname6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtBranch, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13))))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtEmpname3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtACon, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -502,13 +533,22 @@ public class AddEmployee extends javax.swing.JFrame {
         try
         {
             eid = txtEmpid.getText();
-            double sal = Double.parseDouble(esal);
+            //int sal = Integer.parseInt(esal);
             ejob = jcJob.getSelectedItem().toString();
             EmpPojo p = new EmpPojo();
             p.setEmpid(eid);
             p.setEmpname(ename);
             p.setJob(ejob);
-            p.setSal(sal);
+            p.setSal(Integer.parseInt(esal));
+            p.setPs(fis);
+            p.setTag(tag);
+            p.setContact(Integer.parseInt(contact));
+            p.setAlter_contact(Integer.parseInt(alcontact));
+            p.setAddress(add);
+            p.setEmail(email);
+            p.setAccount_no(Integer.parseInt(Accountno));
+            p.setBranch(Branch);
+            p.setIfsc_code(IFSC);
             boolean a = EmpDao.AddEmp(p);
             if(a==true)
             {
@@ -523,11 +563,17 @@ public class AddEmployee extends javax.swing.JFrame {
         }
         catch(NumberFormatException f)
         {
-            JOptionPane.showMessageDialog(null,"Please Field Correct Value","Error",JOptionPane.ERROR_MESSAGE);
+            f.printStackTrace();
+            JOptionPane.showMessageDialog(null,"Please Fill Correct Value","Error",JOptionPane.ERROR_MESSAGE);
         }
         catch(SQLException e)
         {
             System.out.println("Some Pro");
+        }
+        catch(IOException i)
+        {
+            System.out.println("Some iput output exception occur");
+            i.printStackTrace();
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -548,13 +594,13 @@ public class AddEmployee extends javax.swing.JFrame {
         lblimage.setIcon(imageicon);
         try {
             File image = new File(filename);
-            FileInputStream fis = new FileInputStream(image);
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            byte[] buf = new byte[1024];
-            for(int readNum;(readNum=fis.read(buf))!=-1;) {
-                bos.write(buf,0,readNum);
-            }
-            person_image =bos.toByteArray();
+            fis = new FileInputStream(image);
+//            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//            byte[] buf = new byte[1024];
+//            for(int readNum;(readNum=fis.read(buf))!=-1;) {
+//                bos.write(buf,0,readNum);
+//            }
+//            person_image =bos.toByteArray();
         }
         catch(Exception e)
         {
@@ -566,17 +612,17 @@ public class AddEmployee extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnimageClickActionPerformed
 
-    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+    private void jrMrsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrMrsActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton4ActionPerformed
+    }//GEN-LAST:event_jrMrsActionPerformed
 
-    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
+    private void jrFmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrFmActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton5ActionPerformed
+    }//GEN-LAST:event_jrFmActionPerformed
 
-    private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
+    private void jrMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrMActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton6ActionPerformed
+    }//GEN-LAST:event_jrMActionPerformed
 
     /**
      * @param args the command line arguments
@@ -622,6 +668,7 @@ public class AddEmployee extends javax.swing.JFrame {
     private javax.swing.JButton btnIamgeChoose;
     private javax.swing.JButton btnimageClick;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -637,22 +684,22 @@ public class AddEmployee extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JComboBox jcJob;
+    private javax.swing.JRadioButton jrFm;
+    private javax.swing.JRadioButton jrM;
+    private javax.swing.JRadioButton jrMr;
+    private javax.swing.JRadioButton jrMrs;
     private javax.swing.JLabel lblimage;
+    private javax.swing.JTextField txtACN;
+    private javax.swing.JTextField txtACon;
+    private javax.swing.JTextArea txtAdd;
+    private javax.swing.JTextField txtBranch;
+    private javax.swing.JTextField txtCon;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtEmpid;
     private javax.swing.JTextField txtEmpname;
-    private javax.swing.JTextField txtEmpname1;
-    private javax.swing.JTextField txtEmpname2;
-    private javax.swing.JTextField txtEmpname3;
-    private javax.swing.JTextField txtEmpname4;
-    private javax.swing.JTextField txtEmpname5;
-    private javax.swing.JTextField txtEmpname6;
+    private javax.swing.JTextField txtIFSC;
     private javax.swing.JTextField txtSal;
     // End of variables declaration//GEN-END:variables
 }
