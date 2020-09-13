@@ -42,8 +42,8 @@ public class EmpDao {
         ps.setInt(4,(int)p.getSal());
         ps.setString(5,p.getTag());
         ps.setString(6, p.getGender());
-        ps.setInt(7, p.getContact());
-        ps.setInt(8, p.getAlter_contact());
+        ps.setString(7, p.getContact());
+        ps.setString(8, p.getAlter_contact());
         ps.setString(9, p.getAddress());
         ps.setString(10,p.getEmail());
         ps.setInt(11,p.getAccount_no());
@@ -125,8 +125,8 @@ public static EmpPojo findEmpById(String eno)throws SQLException
          e.setActive(rs.getString(5));
          e.setTag(rs.getString(6));
          e.setGender(rs.getString(7));
-         e.setContact(rs.getInt(8));
-         e.setAlter_contact(rs.getInt(9));
+         e.setContact(rs.getString(8));
+         e.setAlter_contact(rs.getString(9));
          e.setAddress(rs.getString(10));
          e.setEmail(rs.getString(11));
          e.setAccount_no(rs.getInt(12));

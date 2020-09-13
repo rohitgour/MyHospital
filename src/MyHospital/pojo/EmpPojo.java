@@ -18,7 +18,7 @@ public class EmpPojo {
         return "EmpPojo{" + "empid=" + empid + ", empname=" + empname + ", job=" + job + ", sal=" + sal + ", active=" + active + ", ps=" + ps + ", tag=" + tag + ", gender=" + gender + ", contact=" + contact + ", alter_contact=" + alter_contact + ", address=" + address + ", email=" + email + ", account_no=" + account_no + ", ifsc_code=" + ifsc_code + ", branch=" + branch + '}';
     }
 
-    public EmpPojo(String empid, String empname, String job, int sal, String active, byte[] picture, FileInputStream ps, String tag, String gender, int contact, int alter_contact, String address, String email, int account_no, String ifsc_code, String branch) {
+    public EmpPojo(String empid, String empname, String job, int sal, String active, byte[] picture, FileInputStream ps, String tag, String gender, String contact, String alter_contact, String address, String email, int account_no, String ifsc_code, String branch) {
         this.empid = empid;
         this.empname = empname;
         this.job = job;
@@ -112,19 +112,19 @@ public class EmpPojo {
         this.gender = gender;
     }
 
-    public int getContact() {
+    public String getContact() {
         return contact;
     }
 
-    public void setContact(int contact) {
+    public void setContact(String contact) {
         this.contact = contact;
     }
 
-    public int getAlter_contact() {
+    public String getAlter_contact() {
         return alter_contact;
     }
 
-    public void setAlter_contact(int alter_contact) {
+    public void setAlter_contact(String alter_contact) {
         this.alter_contact = alter_contact;
     }
 
@@ -179,8 +179,8 @@ public class EmpPojo {
     private FileInputStream ps;
     private String tag;
     private String gender;
-    private int contact;
-    private int alter_contact;
+    private String contact;
+    private String alter_contact;
     private String address;
     private String email;
     private int account_no;

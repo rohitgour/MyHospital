@@ -535,6 +535,7 @@ public class AddEmployee extends javax.swing.JFrame {
             eid = txtEmpid.getText();
             //int sal = Integer.parseInt(esal);
             ejob = jcJob.getSelectedItem().toString();
+            gender = getGen();
             EmpPojo p = new EmpPojo();
             p.setEmpid(eid);
             p.setEmpname(ename);
@@ -542,8 +543,9 @@ public class AddEmployee extends javax.swing.JFrame {
             p.setSal(Integer.parseInt(esal));
             p.setPs(fis);
             p.setTag(tag);
-            p.setContact(Integer.parseInt(contact));
-            p.setAlter_contact(Integer.parseInt(alcontact));
+            p.setGender(gender);
+            p.setContact(contact);
+            p.setAlter_contact(alcontact);
             p.setAddress(add);
             p.setEmail(email);
             p.setAccount_no(Integer.parseInt(Accountno));
