@@ -21,7 +21,7 @@ public class DBConnection {
         try 
         {
             Class.forName("oracle.jdbc.OracleDriver");
-            conn = DriverManager.getConnection("jdbc:oracle:thin:@//hp:1521/xe","myhms","student");
+            conn=DriverManager.getConnection("jdbc:oracle:thin:@//DESKTOP-K1G36F7:1521/XE","Rupesh1","abc1");
             System.out.println("Connection Open Successfully");
             // JOptionPane.showMessageDialog(null,"Connection Open successfully!");
         }
